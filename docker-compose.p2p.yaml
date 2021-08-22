@@ -1,5 +1,5 @@
 version: "3.5"
-services: 
+services:
     jacket:
       image: "linuxserver/jackett:latest"
       ports:
@@ -14,7 +14,9 @@ services:
         - sonarr_local:/config
         - /var/lib/docker/volumes/nfs_nas/_data:/mnt
       environment: 
-        "SONARR_BRANCH": "main"
+        - SONARR_BRANCH=main
+        - PUID=1000
+        - GUID=1000
     radarr:
       image: "linuxserver/radarr:latest"
       ports:
@@ -22,6 +24,9 @@ services:
       volumes: 
         - 28c2746e2b8c6e87b3e39a511c60f389525e3796f1a2fbebd8186bcd82522d40:/config
         - /var/lib/docker/volumes/nfs_nas/_data:/mnt/nas
+      environment: 
+        - PUID=1000
+        - GUID=1000
 volumes: 
   local_jackett:
     external: true
