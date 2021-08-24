@@ -6,6 +6,7 @@ services:
         - "9117:9117"
       volumes: 
         - local_jackett:/config
+        restart: always
     sonarr:
       image: "linuxserver/sonarr:latest"
       ports:
@@ -17,6 +18,7 @@ services:
         - SONARR_BRANCH=main
         - PUID=1000
         - GUID=1000
+        restart: always
     radarr:
       image: "linuxserver/radarr:latest"
       ports:
@@ -27,6 +29,7 @@ services:
       environment: 
         - PUID=1000
         - GUID=1000
+      restart: always
 volumes: 
   local_jackett:
     external: true
