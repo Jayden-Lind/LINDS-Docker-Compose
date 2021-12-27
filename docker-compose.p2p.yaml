@@ -1,16 +1,13 @@
-version: "3.5"
+version: "3.8"
 services:
     jacket:
       image: "linuxserver/jackett:latest"
-      ports:
-        - "9117:9117"
       volumes: 
         - local_jackett:/config
       restart: always
+      network_mode : "host"
     sonarr:
       image: "linuxserver/sonarr:latest"
-      ports:
-        - "8989:8989"
       volumes: 
         - sonarr_local:/config
         - /var/lib/docker/volumes/nfs_nas/_data:/mnt
@@ -18,17 +15,17 @@ services:
         - SONARR_BRANCH=main
         - PUID=1000
         - GUID=1000
+      network_mode : "host"
       restart: always
     radarr:
       image: "linuxserver/radarr:latest"
-      ports:
-        - "7878:7878"
       volumes: 
         - 28c2746e2b8c6e87b3e39a511c60f389525e3796f1a2fbebd8186bcd82522d40:/config
         - /var/lib/docker/volumes/nfs_nas/_data:/mnt/nas
       environment: 
         - PUID=1000
         - GUID=1000
+      network_mode : "host"
       restart: always
 volumes: 
   local_jackett:
